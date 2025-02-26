@@ -20,4 +20,12 @@ function launchModal() {
   modalbg.style.display = "block";
 }
 
+//Fermer formulaire
+const close = document.querySelector(".close");
+close.addEventListener("click", closed);
+
+function closed() {
+  modalbg.style.display = "none";
+}
+//Fin Fermer formulaire
 
