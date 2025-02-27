@@ -29,3 +29,6 @@ function closed() {
 }
 //Fin Fermer formulaire
 
+//traitement formulaire
+
+//Fin traitement formulaire
