@@ -73,6 +73,12 @@ img {
     float: right;
     display: block;
   }
+
+  .topnav{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
   .main-navbar{
     position: fixed;
     right: 0;
@@ -480,6 +486,9 @@ footer {
   margin: 0 20px;
 }
 @media screen and (max-width: 800px) {
+  .logo{
+    height: 20px;
+  }
   .hero-section {
     display: block;
     box-shadow: unset;
