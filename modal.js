@@ -106,6 +106,10 @@ function traitementFormulaire(event){
       const modalBody = document.querySelector(".modal-body");
       modalBody.innerHTML = "";
       modalBody.style.height = "100%";
+      modalBody.style.display = "flex";
+      modalBody.style.flexDirection = "column"; 
+      modalBody.style.justifyContent = "space-around";
+    
 
       let ajoutForm = document.createElement("p");
       ajoutForm.textContent = "Merci pour votre inscription";
