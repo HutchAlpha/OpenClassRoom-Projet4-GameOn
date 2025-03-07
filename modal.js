@@ -109,7 +109,7 @@ function traitementFormulaire(event) {
     console.log(`Prénom : ${prenom.value}, Nom : ${nom.value}, Email : ${email.value}, Date de naissance : ${birthdate.value}, Quantité : ${quantite.value}, Localisation : ${location ? location.value : ""}, conditions : ${conditions}, informer : ${informer}`);
   } 
 }
-
+//! FIN traitement formulaire
 //! Affichage Erreur
 function showError(element, message) {
   const parent = element.closest(".formData");
@@ -125,6 +125,7 @@ function clearErrors() {
     field.removeAttribute("data-error-visible");
   });
 }
+//! fin Affichage Erreur
 
 //!Affichage Confirmation
 function showConfirmationMessage() {
@@ -156,7 +157,7 @@ function showConfirmationMessage() {
 }
 //!Fin Affichage Confirmation
 
-//! Fonction pour restaurer le formulaire initial (comme un rafraîchissement de page)
+//! Fonction pour restaurer le formulaire initial
 function restoreForm() {
   // Réinitialise le contenu de la modal à l'état initial
   modalBody.innerHTML = originalModalBody;let content = document.querySelector(".content");
@@ -165,3 +166,4 @@ function restoreForm() {
   const newForm = document.querySelector("form");
   newForm.addEventListener("submit", traitementFormulaire);
 }
+//! FIN Fonction pour restaurer le formulaire initial
