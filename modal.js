@@ -47,19 +47,12 @@ function traitementFormulaire(event){
   const location = document.querySelector("input[name='location']:checked")?.value || "";
   const conditions = document.getElementById("checkbox1").checked;
   const informer = document.getElementById("checkbox2").checked;
-
-
-  console.log(`Prénom : ${prenom}, Nom : ${nom}, Email : ${email}, Date de naissance : ${birthdate}, Quantité : ${quantite}, Localisation : ${location}, conditions ${conditions}, informer ${informer}`);
   
   // Vérification des données
   const form = document.querySelector("form"); 
 
   for (let i = form.length - 1; i >= 0; i--) {
-    
-    if (form[i].value === "") {
-      alert(`Veuillez renseigner tous les champs du formulaire !`);
-      return;
-    }
+
     if (prenom.length < 2) {
       alert("Veuillez renseigner au moins 2 caractéres pour votre prénom");
       return;
@@ -70,8 +63,14 @@ function traitementFormulaire(event){
       return;
     }
 
-    if (!email.includes("@") ||!email.includes(".")) {
-      alert("Veuillez renseigner un email valide");
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        alert("Veuillez renseigner un email valide");
+        return;
+    }
+
+    if (birthdate.length === 0) {
+      alert("Veuillez renseigner votre date de naissance");
       return;
     }
 
@@ -89,6 +88,8 @@ function traitementFormulaire(event){
       alert("Veuillez accepter les conditions d'utilisation");
       return;
     }
+
+    console.log(`Prénom : ${prenom}, Nom : ${nom}, Email : ${email}, Date de naissance : ${birthdate}, Quantité : ${quantite}, Localisation : ${location}, conditions ${conditions}, informer ${informer}`);
 
     //!Suppresion des données de formulaire
     const questionTournoi = document.querySelector(".text-label");
@@ -118,7 +119,7 @@ function traitementFormulaire(event){
       //?FINOrganisation du block comme sur le FIGMA
 
     let boutonRetour = document.createElement("button");
-    boutonRetour.textContent = "Retour";
+    boutonRetour.textContent = "Fermer";
     boutonRetour.classList.add("btn-submit", "button");
 
     boutonRetour.addEventListener("click", () => {
@@ -127,6 +128,7 @@ function traitementFormulaire(event){
 
     modalBody.appendChild(ajoutForm);
     modalBody.appendChild(boutonRetour);
+
     //!FIN Ajout message confirmation + bouton
   }
 }
