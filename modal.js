@@ -101,13 +101,10 @@ function traitementFormulaire(event) {
     if (questionTournoi) {
       questionTournoi.style.display = "none";
     }
+    console.log(`Prénom : ${prenom.value}, Nom : ${nom.value}, Email : ${email.value}, Date de naissance : ${birthdate.value}, Quantité : ${quantite.value}, Localisation : ${location ? location.value : ""}, conditions : ${conditions}, informer : ${informer}`);
   }
 
-  if (Valid) {
-    // Affiche le message de confirmation et réinitialise le formulaire
-    showConfirmationMessage();
-    console.log(`Prénom : ${prenom.value}, Nom : ${nom.value}, Email : ${email.value}, Date de naissance : ${birthdate.value}, Quantité : ${quantite.value}, Localisation : ${location ? location.value : ""}, conditions : ${conditions}, informer : ${informer}`);
-  } 
+
 }
 //! FIN traitement formulaire
 //! Affichage Erreur
