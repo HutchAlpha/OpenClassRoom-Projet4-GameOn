@@ -1,5 +1,8 @@
 //! Déclaration des DOMS
 const modalbg = document.querySelector(".bground");
+const modalBody = document.querySelector(".modal-body");
+// Stocke le contenu initial du formulaire pour pouvoir le restaurer
+const originalModalBody = modalBody.innerHTML;
 //! FIN Déclaration des DOMS
 
 //!Burgur
@@ -22,12 +25,13 @@ function launchModal() {
 }
 //!FIN Ouverture formulaire
 
-//!Fermer formulaire
+//!Fermer formulaire (icône de fermeture)
 const close = document.querySelector(".close");
 close.addEventListener("click", closed);
 
 function closed() {
   modalbg.style.display = "none";
+  restoreForm();
 }
 //!Fin Fermer formulaire
 
@@ -50,7 +54,7 @@ function traitementFormulaire(event) {
   const quantite = document.getElementById("quantityMatch");
   const location = document.querySelector("input[name='location']:checked");
   const conditions = document.getElementById("checkbox1").checked;
-  const informer = document.getElementById("checkbox2");
+  const informer = document.getElementById("checkbox2").checked;
   
   //? Vérification des données
   if (prenom.value.length < 2) {
@@ -80,11 +84,11 @@ function traitementFormulaire(event) {
   }
 
   if (!location) {
+    // Assure-toi d'avoir ajouté l'attribut id="locationContainer" sur le div englobant les boutons radio de localisation dans ton HTML
     showError(document.getElementById("locationContainer"), "Veuillez renseigner une location");
     Valid = false;
   }
 
-  
   if (!conditions) {
     showError(document.getElementById("checkbox1"), "Veuillez accepter les conditions d'utilisation");
     Valid = false;
@@ -93,14 +97,18 @@ function traitementFormulaire(event) {
   if (Valid) {
     showConfirmationMessage();
 
-    //? Suppression des données de formulaire (optionnel)
+    // Optionnel : masquer un éventuel élément de texte si nécessaire
     const questionTournoi = document.querySelector(".text-label");
     if (questionTournoi) {
       questionTournoi.style.display = "none";
     }
   }
 
-  console.log(`Prénom : ${prenom.value}, Nom : ${nom.value}, Email : ${email.value}, Date de naissance : ${birthdate.value}, Quantité : ${quantite.value}, Localisation : ${location ? location.value : ""}, conditions : ${conditions}, informer : ${informer}`);
+  if (Valid) {
+    // Affiche le message de confirmation et réinitialise le formulaire
+    showConfirmationMessage();
+    console.log(`Prénom : ${prenom.value}, Nom : ${nom.value}, Email : ${email.value}, Date de naissance : ${birthdate.value}, Quantité : ${quantite.value}, Localisation : ${location ? location.value : ""}, conditions : ${conditions}, informer : ${informer}`);
+  } 
 }
 
 //! Affichage Erreur
@@ -118,13 +126,13 @@ function clearErrors() {
     field.removeAttribute("data-error-visible");
   });
 }
-//!Affichage
-//?Ajout message confirmation + bouton
+
+//!Affichage Confirmation
 function showConfirmationMessage() {
-  const modalBody = document.querySelector(".modal-body");
-  // Réorganisation du contenu pour afficher le message de confirmation
+  // Réorganise le contenu pour afficher le message de confirmation
   let content = document.querySelector(".content");
   content.style.height = "100%";
+
   modalBody.innerHTML = "";
   modalBody.style.height = "100%";
   modalBody.style.display = "flex";
@@ -141,10 +149,20 @@ function showConfirmationMessage() {
   boutonRetour.classList.add("btn-submit", "button");
   boutonRetour.addEventListener("click", () => {
     modalbg.style.display = "none";
+    restoreForm();
   });
 
   modalBody.appendChild(ajoutForm);
   modalBody.appendChild(boutonRetour);
-  //?FIN Ajout message confirmation + bouton
 }
-//!Fin traitement formulaire
+//!Fin Affichage Confirmation
+
+//! Fonction pour restaurer le formulaire initial (comme un rafraîchissement de page)
+function restoreForm() {
+  // Réinitialise le contenu de la modal à l'état initial
+  modalBody.innerHTML = originalModalBody;let content = document.querySelector(".content");
+  content.style.height = "820px";
+  // Réattache le gestionnaire de soumission au formulaire réinitialisé
+  const newForm = document.querySelector("form");
+  newForm.addEventListener("submit", traitementFormulaire);
+}
