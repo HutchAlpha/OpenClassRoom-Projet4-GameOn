@@ -97,7 +97,6 @@ function traitementFormulaire(event) {
   if (Valid) {
     showConfirmationMessage();
 
-    // Optionnel : masquer un éventuel élément de texte si nécessaire
     const questionTournoi = document.querySelector(".text-label");
     if (questionTournoi) {
       questionTournoi.style.display = "none";
